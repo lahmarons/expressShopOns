@@ -1,0 +1,12 @@
+name: CI
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tp02
+    steps:
+      -run: echo "Bonjour"
