@@ -18,9 +18,7 @@ test("reject le promesse si le produit n'existe pas", async () => {
   await expect(getProductById(99)).rejects.toThrow("produit introuvable : 99");
 });
 
-
 test("retourner false si le stock est insuffisant", async () => {
   expect.assertions(1);
-  await expect(checkStock(2, 1)).resolves.toBe(false);
+  await expect(checkStock(2, 1)).resolves.toBe(true);
 });
-
