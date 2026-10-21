@@ -47,12 +47,12 @@ class Cart {
     if (!Number.isInteger(quantity) || quantity < 1) {
       throw new RangeError(`Quantité invalide : ${quantity}`);
     }
-    if (typeof price !== 'number' || !Number.isFinite(price) || price < 0) {
+    if (typeof price !== "number" || !Number.isFinite(price) || price < 0) {
       throw new RangeError(`Prix invalide : ${price}`);
     }
     const existing = this.items.find((item) => item.id === id);
     if (existing) {
-      existing.quantity = quantity;
+      existing.quantity += quantity;
     } else {
       this.items.push({ id, name, price, quantity });
     }
@@ -60,7 +60,9 @@ class Cart {
 
   removeItem(id) {
     const index = this.items.findIndex((item) => item.id === id);
-    this.items.splice(index, 1);
+    if (index !== -1) {
+      this.items.splice(index, 1);
+    }
   }
 
   getItems() {
@@ -72,7 +74,10 @@ class Cart {
   }
 
   getTotal() {
-    const total = this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = this.items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
     return round2(total);
   }
 
